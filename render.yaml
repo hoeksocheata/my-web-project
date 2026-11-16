@@ -1,0 +1,14 @@
+# Deploy ឥតគិតថ្លៃលើ Render (SQLite — ទិន្នន័យអាចត្រូវលុបពេល redeploy ព្រោះ free plan គ្មាន disk)
+services:
+  - type: web
+    name: bookstore
+    runtime: docker
+    plan: free
+    envVars:
+      - { key: APP_ENV, value: production }
+      - { key: APP_DEBUG, value: "false" }
+      - { key: APP_KEY, generateValue: true }   # ត្រូវកែជា base64:... ដូចក្នុងឯកសារ DEPLOY.md
+      - { key: DB_CONNECTION, value: sqlite }
+      - { key: SESSION_DRIVER, value: file }
+      - { key: RUN_SEED, value: "true" }
+      - { key: BOOKSTORE_DEMO, value: "true" }
